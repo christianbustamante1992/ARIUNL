@@ -1,0 +1,139 @@
+#map3 {
+
+    width: 100%;
+    height: 100%;
+}
+
+#rango-mapa{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    margin-right: auto;
+    margin: auto;
+}
+
+#rango-icon{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+.scroll {
+    height: 100%;
+}
+
+.popup-head{
+    background: #081e47;
+    font-family: "Arial", Times, serif;
+    font-weight: bold;
+}
+
+.popup-title{
+    color: white;
+}
+.popup-sub-title{
+    color: white;
+}
+
+.popup-body {
+    padding: 20px;
+    font-family: "Times New Roman";
+    text-align: justify;
+    font-weight: normal;
+    font-style: italic;
+
+}
+.popup-buttons .button{
+    background: #081e47;
+    color: white;
+}
+
+#popup {
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+    margin:0;
+    /* Animación que durará 2 segundos*/
+    -webkit-animation:autopopup 2s;
+    -moz-animation:autopopup 2s;
+    animation:autopopup 2s;
+}
+.modal-header{
+
+    background: #081e47;
+    color:white; 
+
+}
+
+#color-buscar{
+
+    background: #ffffff; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+#contenido-info{
+    background: url(../img/aveInfo.png) no-repeat center fixed;
+    text-align: justify; 
+
+}
+#button-footer{
+    background: #081e47;
+    font-weight: bold;
+    color: white;
+    width: 48%;
+    font-size:1rem;
+}
+.loading{
+    padding: 20px;
+    font-family: "Times New Roman";
+    text-align: justify;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 10px;
+}
+.spinner svg {
+    width: 28px;
+    height: 28px;
+    stroke: #444;
+    fill: white;
+}
+.gm-style-iw {
+    width: 80%;
+    top: 15px !important;
+    left: 30px !important;
+    background-color: none;
+
+}
+#iw-container {
+    margin-bottom: 0.01px;
+    overflow: hidden;
+    color: white;
+
+}
+.dir{
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 1px;
+    overflow: hidden;
+}
+#iw-container .iw-title {
+    font-family: "Arial", Times, serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background: rgba(49,92,168,1);
+    background: -moz-radial-gradient(center, ellipse cover, rgba(49,92,168,1) 0%, rgba(117,189,209,1) 59%, rgba(147,206,222,1) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(49,92,168,1)), color-stop(59%, rgba(117,189,209,1)), color-stop(100%, rgba(147,206,222,1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(49,92,168,1) 0%, rgba(117,189,209,1) 59%, rgba(147,206,222,1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(49,92,168,1) 0%, rgba(117,189,209,1) 59%, rgba(147,206,222,1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(49,92,168,1) 0%, rgba(117,189,209,1) 59%, rgba(147,206,222,1) 100%);
+    background: radial-gradient(ellipse at center, rgba(49,92,168,1) 0%, rgba(117,189,209,1) 59%, rgba(147,206,222,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#315ca8', endColorstr='#93cede', GradientType=1 );
+}

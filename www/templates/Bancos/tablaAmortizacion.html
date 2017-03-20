@@ -1,0 +1,29 @@
+<ion-view view-title="Tabla de Amortización">
+    <ion-content >
+        <center>
+            <div style="overflow-x:auto; font-size: 12px;">
+                <table class="fixed_headers " id="tabla" >
+                    <thead>
+                        <tr>
+                            <th>Nº</th> 
+                            <th>Capital</th>
+                            <th>Interés</th>
+                            <th>Cuotas</th>
+                            <th>Saldo Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat=" x in tabla">
+                            <td>{{x.i}}</td>
+                            <td>{{x.amortizacion}}</td>
+                            <td>{{x.interes}}</td>
+                            <td>{{x.cuota}}</td>
+                            <td>{{ x.saldofinal}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </center>
+
+    </ion-content>
+</ion-view>

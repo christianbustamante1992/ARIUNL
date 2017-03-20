@@ -1,0 +1,54 @@
+<ion-view view-title="Resultado">
+    
+    <ion-content class="has-header" padding="true"  id="letra">
+        <nav  id="tituloR" style="padding-top: 5px; padding-bottom:5px;" >DATOS DE FINANCIAMIENTO</nav>
+        <table class="table" id="tabla-borde" >
+            <tr id="tabla-borde">
+                <th id="tabla-datos">Crédito</th>
+                <td id="tabla-borde">{{credito_seleccionado}}</td>
+            </tr>
+            <tr id="tabla-borde">
+                <th  id="tabla-datos">Monto</th>
+                <td id="tabla-borde"  >${{datos_Ingresados.monto}}</td>
+            </tr>
+            <tr id="tabla-borde">
+                <th  id="tabla-datos">Plazo</th>
+                <td id="tabla-borde" >{{datos_Ingresados.plazo}}  (MESES)</td>
+            </tr>
+            <tr id="tabla-borde" style="border:1px solid white; ">
+                <th  id="tabla-datos">Sistema Amortización</th>
+                <td id="tabla-borde" >{{datos_Ingresados.datos_sistemas}}</td>
+            </tr> 
+        </table>
+
+        <nav id="tituloR"> TABLA DE BANCOS <h1 id="nota" style="display:none;"> <img src="img/mejor_opcion.PNG"> Mejor crédito <button type="button" class="btn btn-warning" ng-click="verMapa()" style="font-size: 12px; height: 23px; padding:3px; " ui-sref="app.rutaBancos">Ver Ruta</button></h1></nav>
+        <nav id="tituloR"><h1 id="mapa" style="display:none; font-size: 12px; padding-bottom: 7px; color:white;"> i <button  type="button" class="btn btn-warning "  style="font-size: 12px; height: 23px; padding:3px; float: right;" ng-click="verMapa()" style="display:none;"  ui-sref="app.rutaBancos"> <i class="ion-android-map" style="color: #878787"></i> Ver Ruta</button></h1></nav>
+
+        <div style="overflow-x:auto;">
+            <table class="table" id="tabla">
+                <tr id="tabla-resultado">
+                    <th id="tabla-resultado" >Bancos</th>
+                    <th id="tabla-resultado">Tasa Interés</th>
+                    <th id="tabla-resultado">Total Cuotas</th>
+                    <th id="tabla-resultado">Tabla Pagos.</th>
+                </tr>
+                <tr id="tabla" ng-repeat="banco in bancos_credito| orderBy : 'banco.nombreEmpresa'" ng-class="{'custom-class': banco.opcion == 1}">
+                    <td id="tabla" data-title="'Banco'">
+                        <span >{{banco.nombreEmpresa}} </span>
+                    </td>
+                    <td id="tabla" data-title="'Tasa Interes'">
+                        <span >{{banco.TOTALES.tasa_credito}}%</span>
+                    </td>
+                    <td id="tabla" data-title="'Total Cuotas'">
+                        <span >${{banco.TOTALES.total_cuota}}</span>
+                    </td>
+                    <td id="tabla" data-title="'Tabla Pagos'">
+                        <button  class="btn btn-primary btn-xs" id="simuladorCrDio-button6" ui-sref="app.tablaBancos" ng-click="mostrarDatosTabla(banco)">Ver</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </ion-content>
+
+</ion-view>
+

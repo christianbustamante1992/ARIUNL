@@ -1,0 +1,38 @@
+<ion-view cache-view="false" view-title="Detalle Medicamento">
+  <ion-content >
+
+<div>
+  <div class="card">
+  <div class="item item-divider">
+  <center>{{datos.nombreProducto}}</center>
+</div>
+<div class="item item-text-wrap">
+    <p><b>Presentacion:</b> {{datos.nombrePresentacion}}</p>
+    <p><b>Fabricante:</b> {{datos.fabricante}}</p>
+    <p><b>Unidades por presentación:</b> {{datos.unidadesPresentacion}}</p>
+    <p><b>Precio Tope:</b> {{datos.precioTope}}</p>
+    <p><b>Precio por unidad:</b> {{datos.precioUnidad}}</p>
+    <p><b>Observación:</b> {{datos.observacion}}</p>
+</div>
+
+  <div class="card">
+  <div class="item item-divider">
+    Medicamento Alternativo
+  </div>
+  <div class="item item-text-wrap">
+    {{datos.similarProducto}}
+  </div>
+  
+</div>
+   
+  
+<br>
+  <div>
+    <a href="#/app/medicamentoscomerciales/detallemed/AllFarmacias/{{datos.idProducto}}">
+          
+            <center><button class="button button-large my-color ion-android-list" type="button"> Ver Farmacias</button></center>
+         
+        </a>
+  </div>
+  </ion-content>
+</ion-view>

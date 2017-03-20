@@ -1,0 +1,20 @@
+<ion-view view-title="Medicamentos Genéricos">
+  
+<div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Ingrese nombre del medicamento" required ng-model="search">
+    </label>
+    <button class="button my-color ion-ios-search-strong" ng-disabled="form.$invalid" ng-click="buscar()"> Buscar</button>
+  </div>
+    
+  <ion-content class="has-subheader">
+      
+    <ion-list >
+           <ion-item href="#/app/medicamentosgenericos/detallemed/{{item.idProducto}}/{{item.idPresentacion}}" ng-repeat="item in medicamentos">
+                <p>{{item.nombreProducto}} {{item.nombrePresentacion}}</p>
+           </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

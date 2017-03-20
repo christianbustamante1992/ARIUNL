@@ -1,0 +1,21 @@
+.menu{
+    color: white;
+    font-family: "Arial", Times, serif;
+    
+}
+#center-table{
+   transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+   left: 50%;
+   top: 50%;
+   position: absolute;
+}
+
+#inicio-contenido{
+    color:#081e47;
+    background: url(../img/aveFondo.png) no-repeat center center fixed;
+    text-align: justify; 
+    background-color: rgba(0,0,0,0.1);
+    font-weight: bold;
+
+}

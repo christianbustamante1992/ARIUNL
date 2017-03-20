@@ -1,0 +1,37 @@
+
+<ion-view  title="Farmacia" ng-init="refrescar()"> 
+    <ion-nav-buttons side="secondary">
+        <div>
+            <button class="button button-icon" ng-click="openPopover($event)" ><i class="ion-android-more-vertical" style="color: white"></i></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content scroll="false">
+        <div class="bar bar-header item-input-inset" class="input-group" id="color-buscar" scroll="false">        
+            <label class="item-input-wrapper" style="background: white;">
+                <input type="search" placeholder="{{userType}}" id="text-buscador" value="" ng-model="user.age">
+            </label>
+            <button class="button" id="but-buscar" ng-click="buscadorText()">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+            </button>
+
+        </div>
+        <div class="item range range-positive" id="rango-mapa" style="position: absolute; right: -88px; top: 200px; background-color: transparent; border-color:transparent;">
+            <i class="icon ion-android-walk" id="rango-icon" style="font-size: 40px; color: red;"></i>
+            <input type="range"  name="valordis" min="1" max="10" value="10" ng-model="distancia" ng-change="cambiardistancia(distancia)">
+            <i style="color: red; transform: rotate(90deg); -ms-transform: rotate(90deg); -webkit-transform: rotate(90deg);">{{distancia}} km.</i>
+        </div>
+        <div id="map3" data-tap-disabled="true"></div>   
+        <script id="popover.html" type="text/ng-template">
+            <ion-popover-view style="height: 170px">
+            <ion-content >
+            <div class="list" ng-click="popover.hide()" >
+            <a class="item" ng-click="turnoFarmacia()" id="popover-letra">Farmacias de Turno</a>
+            <a class="item" ng-click="refrescar()" id="popover-letra">Refrescar</a>
+            <a class="item" ng-click="ayuda()" id="popover-letra">Ayuda</a>
+            </div>
+            </ion-content>
+            </ion-popover-view>
+        </script>
+    </ion-content>
+</ion-view>
+
