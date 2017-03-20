@@ -2,8 +2,11 @@ angular.module('starter.controllersfarmacia', [])
 
         .controller('mapaFarmaciaCtrl', function ($scope, $compile, $ionicLoading, $ionicPopup, $timeout, $ionicPopover, $cordovaNetwork) {
 
+
+
             ///VARIABLES GLOBALES
             var direccionServidor = "http://bancos.cis.unl.edu.ec/farmacia/getAll/";
+            
             var datosTemporales = new Array(); // datos temporales que guarda todas las farmacias 
             var datosTemporalesTurno = new Array();
             var limites = new google.maps.LatLngBounds();
@@ -25,8 +28,6 @@ angular.module('starter.controllersfarmacia', [])
             var directionsService = 0;
             var banderaMarcador = true;
 
-
-
             function dibujarMarcadorMiPos(miUbi, mapa) {
                 return new google.maps.Marker({
                     position: miUbi,
@@ -45,11 +46,12 @@ angular.module('starter.controllersfarmacia', [])
                     scaleControl: false,
                     streetViewControl: false,
                     zoomControl: false
+
                 };
             }
             //Función para obtener la informacion del horario de la farmacia
             function formatoInformacionHorario(datosFarmacia) {
-                return "<label id='horario' class='item item-icon-left'  style='display: none;background:none;'> " + "*   "
+                return "<label id='horario' class='item item-icon-left'  style='display: none;background:none;'> " + "   "
                         + datosFarmacia.descripcion + ": " + "</label>" +
                         "<label id='horaInicio' class='item item-icon-left'  style='display: none;background:none;'> "
                         + datosFarmacia.horaInicioHorario + "</label>" +
@@ -136,9 +138,11 @@ angular.module('starter.controllersfarmacia', [])
 
             //Funcion buscar
             $scope.buscadorText = function () {
-                if ($scope.user.age == "")
-                    alert("Ingrese texto");
-                else {
+                if ($scope.user.age == "") {
+                    mensaje = "Ingrese Texto";
+                    alerta(mensaje, "Aceptar", "Error");
+
+                } else {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         loadMarkersPorNombre(position.coords.latitude, position.coords.longitude, $scope.user.age);
                     });
@@ -149,32 +153,11 @@ angular.module('starter.controllersfarmacia', [])
             function localizame() {
                 mensaje = 'Cargando farmacias cercanas a ' + radODis + ' KM de su ubicación';
                 alertaCargando(mensaje);
-                //if ($cordovaNetwork.isOnline() == true) {
+
                 navigator.geolocation.getCurrentPosition(initialize, function (error) {
                     $ionicLoading.hide();
-                    cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
-                        if (canRequest) {
-                            cordova.plugins.locationAccuracy.request(function () {
-                            }, function (error) {
-                                if (error) {
-                                    if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
-//                                            if (window.confirm("No se pudo establecer automáticamente el modo de ubicación. ¿Desea cambiar a la página Configuración de la ubicación y hacerlo manualmente?")) {
-//                                                cordova.plugins.diagnostic.switchToLocationSettings();
-//                                            }
-                                    }
-                                }
-                            }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY // iOS will ignore this
-                                    );
-                        }
-                        localizame();
-                    });
-
+                    activarGPS();
                 }, {maximumAge: 3000, timeout: 3000, enableHighAccuracy: true});
-//                } else {
-//                    mensaje = "Verifique que esté conectado a una red Wifi o sus datos móviles estén acivos, intente nuevamente más tarde.";
-//                    alerta(mensaje, "Aceptar", "Compruebe su Conexión")
-//                    $ionicLoading.hide();
-//                }
 
             }
 
@@ -198,7 +181,6 @@ angular.module('starter.controllersfarmacia', [])
                     datosTemporalesTurno = records;
                     var farmaciaHorario = "<div>";
                     for (var i = 0; i < records.result.length - 1; i++) {
-
                         record = records.result[i];
                         recordAux = records.result[i + 1];
                         if (record.nombreSucursal === recordAux.nombreSucursal) {
@@ -212,14 +194,13 @@ angular.module('starter.controllersfarmacia', [])
                         }
                     }
                     if (records.result.length <= 1) {
-                        mensaje = "No hay farmacias  a " + radODis + " KM de su ubicación";
-                        alerta(mensaje, "Aceptar", "CARGANDO FARMACIAS")
+                        mensaje = "No existen farmacias  a " + radODis + " KM de su ubicación";
+                        alerta(mensaje, "Aceptar", "Mensaje")
                         $ionicLoading.hide();
                     }
-                }).fail(function () {
-                    //alerta("NO HAY CONEXION CON EL SERVIDOR ");
+                }).fail(function (e) {
                     mensaje = "Lo sentimos, actualmente existen problemas con el servidor. Intente mas tarde";
-                    alerta(mensaje, "Aceptar", "CARGANDO FARMACIAS")
+                    alerta(mensaje, "Aceptar", "Mensaje")
                     $ionicLoading.hide();
                 });
 
@@ -242,10 +223,10 @@ angular.module('starter.controllersfarmacia', [])
                 markerUsuario = dibujarMarcadorMiPos(myLatLng, map);
                 var farmaciaHorario = "<div>";
                 var turnoFarmacia = new Array();
-                for (var i = 0; i < datosTemporalesTurno.length - 1; i++) {
-
-                    record = datosTemporalesTurno.result[i];
-                    recordAux = datosTemporalesTurno.result[i + 1];
+                for (var i = 0; i < datosTemporalesTurno.result.length - 1; i++) {
+                    record = datosTemporales.result[i];
+                    recordAux = datosTemporales.result[i + 1];
+                    console.log(record.nombreSucursal + " " + i);
                     if ((fechaCel >= record.fechaInicio) && (fechaCel <= record.fechaFin)) {
                         turnoFarmacia.push(datosTemporalesTurno.result[i]);
                         if (record.nombreSucursal === recordAux.nombreSucursal) {
@@ -261,15 +242,17 @@ angular.module('starter.controllersfarmacia', [])
                     }
                 }
 
+
                 if (turnoFarmacia.length <= 0) {
-                    mensaje = "No hay farmacias en Turno a " + radODis + " KM de su ubicación";
-                    alerta(mensaje, "Aceptar", "CARGANDO FARMACIAS")
+                    mensaje = "No hay farmacias de Turno a " + radODis + " KM de su ubicación";
+                    alerta(mensaje, "Aceptar", "Mensaje")
                     $ionicLoading.hide();
                 }
                 banderaBuscar = 1;
                 datosTemporales = turnoFarmacia;
 
             }
+            ;
 
             //funcion que carga la farmacia que el usuario mando a buscar
             function loadMarkersPorNombre(lat, lon, nombre) {
@@ -429,8 +412,8 @@ angular.module('starter.controllersfarmacia', [])
                                     $('div #horaFin').eq(i).text().split(":")[0] + ":" + $('div #horaFin').eq(i).text().split(":")[1] + "<br/>";
                         }
                         var mensaje =
-                                "<div  class='list' id='contenido-info' style='margin-top: 10%;'>" +
-                                "<div style='padding-bottom:15px;'><i class='icon ion-location' style='font-size:25px; color: red'></i> " + $('#direccion').text() + "</div>" +
+                                "<div  class='list' id='contenido-info' style='margin-top: 4%;'>" +
+                                "<div style='padding-bottom:15px;'><i class='icon ion-location' style='font-size:20px; color: red'></i> " + $('#direccion').text() + "</div>" +
                                 "<div style='padding-bottom:15px;'><i class='icon ion-ios-telephone' style='font-size:20px; color: red'></i>  " + $('#telefono').text() + "</div>" +
                                 "<div style='padding-bottom:15px;'><i class='icon ion-map' style=' font-size:20px; color: red'></i>  " + $('#distancia').text() + "</div>" +
                                 "<div style='padding-bottom:15px;'><i class='icon ion-clock' style='font-size:20px; color: red'></i> Horarios:" + datosHorario + "</div>"
@@ -440,6 +423,24 @@ angular.module('starter.controllersfarmacia', [])
                     });
                 });
 
+            }
+            function activarGPS() {
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                    if (canRequest) {
+                        cordova.plugins.locationAccuracy.request(function () {
+                        }, function (error) {
+                            if (error) {
+                                if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+                                    if (window.confirm("No se pudo establecer automáticamente el modo de ubicación. ¿Desea cambiar a la página Configuración de la ubicación y hacerlo manualmente?")) {
+                                        cordova.plugins.diagnostic.switchToLocationSettings();
+                                    }
+                                }
+                            }
+                        }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY // iOS will ignore this
+                                );
+                    }
+                    localizame();
+                });
             }
 
             //Mensaje cuando se carga los marcadores en el mapa
@@ -478,12 +479,20 @@ angular.module('starter.controllersfarmacia', [])
                     $scope.popover.hide();
                 });
             }
-        });
-        
+        }).run(function ($ionicPlatform, $ionicPopup) {
 
-
-
-
-
-
+    $ionicPlatform.ready(function () {
+        if (window.Connection) {
+            if (navigator.connection.type == Connection.NONE) {
+                $ionicPopup.alert({
+                    title: "VERIFIQUE SU CONEXION A INTERNET",
+                    content: "Verifique que esté conectado a una red Wifi o sus datos móviles estén acivos, intente nuevamente más tarde."
+                })
+                        .then(function (result) {
+                            ionic.Platform.exitApp();
+                        });
+            }
+        }
+    });
+});
 

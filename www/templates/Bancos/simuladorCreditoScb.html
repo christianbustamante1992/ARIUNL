@@ -9,10 +9,9 @@
             </div>
             <div class="form-group" id="val">
                 <label id="val-label" for="">MONTO A SOLICITAR</label >
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                
                     <input  id="val-imput" class="form-control"  name="monto" title="Se necesita un nombre" class="ng-valid" ng-model="datos_credito.monto"placeholder="0.00" type="number" max="{{monto_max}}" min="{{monto_min}}" required>
-                </div>
+                
                 <span class="color-val" ng-show="!form.simulador.$pristine && form.simulador.monto.$error.required">El monto es requerido .</span>
                 <span class="color-val" ng-show="!form.simulador.$pristine && form.simulador.monto.$error.min" >El valor del monto debe estar entre {{monto_min}} y {{monto_max}}.</span>
                 <span class="color-val" ng-show="!form.simulador.$pristine && form.simulador.monto.$error.max">El valor del monto debe estar entre {{monto_min}} y {{monto_max}}  .</span>

@@ -173,7 +173,7 @@ angular.module('starter.controllersmedicamentos', ['ngCordova'])
             maximumAge: 0
         };
 
-        $ionicLoading.show();
+        
 
         $scope.distancia = 10;
         $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
@@ -182,6 +182,7 @@ angular.module('starter.controllersmedicamentos', ['ngCordova'])
 
              if ($cordovaNetwork.isOnline() === true) {
               $http.get('http://farmacias.cis.unl.edu.ec/Farmacia/getAll/'+$state.params.idmed+'/'+lat+'/'+long+'/10').success(function(data){
+                    $ionicLoading.show();
                     if (data.length > 0) {
                       $scope.datos = data;
                       $ionicLoading.hide();

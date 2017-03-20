@@ -310,14 +310,7 @@ angular.module('starter.controllersbancos', [])
                 alertaMensaje(mensaje, "Entendido", " <div class='ion-help-circled' style='text-align: left;'> Ayuda</div> ");
 
             }
-            $scope.doRefresh = function () {
-                $timeout(function () {
-                    radio = 10;
-                    $scope.datos_creditos = [];
-                    $scope.mapa();
-                    $scope.$broadcast('scroll.refreshComplete');
-                }, 1000);
-            };
+          
 
             // Centra la ubicacion del usuario en el mapa
             $scope.centerOnMe = function () {
@@ -411,7 +404,7 @@ angular.module('starter.controllersbancos', [])
             function alertaCargando(mensaje) {
                 $scope.loading = $ionicLoading.show({
                     content: 'gfg',
-                    template: '<ion-spinner class="spinner-light"></ion-spinner> </br> ' + mensaje,
+                    template: '<ion-spinner icon="bubbles"> </ion-spinner> </br>' + mensaje,
                     showBackdrop: true
                 });
             }
