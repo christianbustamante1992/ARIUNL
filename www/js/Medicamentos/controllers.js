@@ -1,6 +1,6 @@
 angular.module('starter.controllersmedicamentos', ['ngCordova'])
 
-.controller('CrtlMedCom', ['$scope','$http','$state','$cordovaNetwork','$cordovaDialogs','$ionicLoading', function($scope,$http,$state,$cordovaNetwork,$cordovaDialogs,$ionicLoading){
+.controller('CrtlMedCom', ['$scope','$http','$state','$cordovaNetwork','$cordovaDialogs','$cordovaBarcodeScanner','$ionicLoading', function($scope,$http,$state,$cordovaNetwork,$cordovaDialogs,$cordovaBarcodeScanner,$ionicLoading){
   $scope.buscar = function  () {
     $ionicLoading.show();
       if (($cordovaNetwork.isOnline() === true)&&($scope.search.length > 0)) {
@@ -20,6 +20,15 @@ angular.module('starter.controllersmedicamentos', ['ngCordova'])
       };
 
   }
+
+  $scope.scanBarcode = function() {
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            alert(imageData.text);
+            
+        }, function(error) {
+            console.log("An error happened -> " + error);
+        });
+    };
 
 }])
 
